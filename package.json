@@ -1,0 +1,22 @@
+{
+  "name": "awesome-kanban-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "kanban",
+    "server",
+    "typescript"
+  ],
+  "author": "Piyush Jain",
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "concurrently": "^8.0.1",
+    "rimraf": "^5.0.1"
+  }
+}
