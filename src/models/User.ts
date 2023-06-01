@@ -8,21 +8,23 @@ const userSchema = new Schema(
       unique: true,
       trim: true,
       maxLength: 25,
-      lowercase: true,
       index: true,
+    },
+    name: {
+      type: String,
+      maxLength: 40,
     },
     email: {
       type: String,
       required: true,
       unique: true,
       trim: true,
-      lowercase: true,
       index: true,
+      match: /^([a-zA-Z0-9_.+-]+)@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$/,
     },
     password: {
       type: String,
       required: true,
-      minLength: 6,
     },
     projects: [
       {

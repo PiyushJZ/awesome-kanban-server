@@ -16,7 +16,7 @@ const { PORT, MONGO_URL } = process.env;
 const app: Express = express();
 
 /**
- * MIDDLEWARE
+ * MIDDLEWARE SETUP
  */
 app.use(express.json());
 app.use(helmet());
