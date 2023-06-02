@@ -6,6 +6,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import homeRoute from '@routes/home';
+import authRoutes from '@routes/auth';
+import projectRoutes from '@routes/project';
+import taskRoutes from '@routes/task';
 
 /**
  * CONFIGURATIONS
@@ -35,6 +38,9 @@ app.use('/assets', express.static('public/assets'));
  * - Protected/Private: Accessible only by Authenticated and Authorized users
  */
 app.use('/', homeRoute);
+app.use('/auth', authRoutes);
+app.use('/task', taskRoutes);
+app.use('/project', projectRoutes);
 
 /**
  * MONGOOSE SETUP

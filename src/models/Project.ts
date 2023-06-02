@@ -31,6 +31,12 @@ const projectSchema = new Schema(
       type: Date,
       immutable: true,
     },
+    categories: [
+      {
+        type: String,
+        unique: true,
+      },
+    ],
   },
   { timestamps: true }
 );

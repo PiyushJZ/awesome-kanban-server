@@ -39,6 +39,10 @@ const taskSchema = new Schema(
     timeSpent: {
       type: [Number],
     },
+    category: {
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );

@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { mobileRegex, emailRegex } from '@regex';
 
 const userSchema = new Schema(
   {
@@ -20,11 +21,19 @@ const userSchema = new Schema(
       unique: true,
       trim: true,
       index: true,
-      match: /^([a-zA-Z0-9_.+-]+)@([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,6}$/,
+      match: emailRegex,
     },
     password: {
       type: String,
       required: true,
+    },
+    phone: {
+      type: String,
+      validate: {
+        validator: (value: string) => {
+          mobileRegex.test(value);
+        },
+      },
     },
     projects: [
       {
