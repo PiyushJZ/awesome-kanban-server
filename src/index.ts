@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import homeRoute from '@routes/home';
 
 /**
  * CONFIGURATIONS
@@ -26,6 +27,14 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
 app.use('/assets', express.static('public/assets'));
+
+/**
+ * ROUTES SETUP
+ * Two types of routes:
+ * - Public routes: Accessible by anyone on the web
+ * - Protected/Private: Accessible only by Authenticated and Authorized users
+ */
+app.use('/', homeRoute);
 
 /**
  * MONGOOSE SETUP

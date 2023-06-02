@@ -4,10 +4,10 @@
   "description": "Server for the kanban application",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && pnpm exec tsc",
+    "build": "rimraf dist && pnpm exec tsc && pnpm exec tsc-alias",
     "preserve": "pnpm build",
-    "serve:development": "pnpm preserve && NODE_ENV=dev concurrently \"pnpm exec tsc -w\"  \"nodemon dist/index.js\"",
-    "serve:production": "pnpm preserve && NODE_ENV=prod node dist/index.js"
+    "serve:dev": "pnpm preserve && NODE_ENV=dev concurrently \"pnpm exec tsc -w\" \"pnpm exec tsc-alias -w\" \"nodemon dist/index.js\"",
+    "serve:prod": "pnpm preserve && NODE_ENV=prod node dist/index.js"
   },
   "keywords": [
     "kanban",
@@ -26,6 +26,7 @@
     "@types/node": "^20.2.5",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
+    "tsc-alias": "^1.8.6",
     "typescript": "^5.0.4"
   },
   "dependencies": {
