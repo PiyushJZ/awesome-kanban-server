@@ -3,7 +3,12 @@ declare global {
     interface ProcessEnv {
       PORT: number;
       MONGO_URL: string;
-      SECRET: string;
+      JWT_SECRET: string;
+      SESSION_SECRET: string;
+      SECURE_COOKIE: boolean;
+      REDIS_PORT: number;
+      REDIS_URL: string;
+      REDIS_PASSWORD: string;
       APPWRITE_URL: string;
       APPWRITE_PROJECT_ID: string;
       APPWRITE_BUCKET_SECRET: string;

@@ -1,6 +1,6 @@
 import { Client, Storage, ID, InputFile } from 'node-appwrite';
-import { ApiResponse } from '@interfaces/api';
-import { StorageResponse } from '@interfaces/appwrite';
+import { ApiResponse } from '@interfaces';
+import { StorageResponse } from '@interfaces';
 
 const appwriteClient = new Client();
 const storage = new Storage(appwriteClient);

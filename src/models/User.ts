@@ -14,6 +14,7 @@ const userSchema = new Schema(
     name: {
       type: String,
       maxLength: 40,
+      index: true,
     },
     email: {
       type: String,
@@ -29,11 +30,19 @@ const userSchema = new Schema(
     },
     phone: {
       type: String,
-      validate: {
-        validator: (value: string) => {
-          mobileRegex.test(value);
-        },
-      },
+      match: mobileRegex,
+    },
+    googleAuth: {
+      type: Map,
+      of: String,
+    },
+    githubAuth: {
+      type: Map,
+      of: String,
+    },
+    microsoftAuth: {
+      type: Map,
+      of: String,
     },
     projects: [
       {

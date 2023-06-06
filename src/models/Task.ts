@@ -43,6 +43,16 @@ const taskSchema = new Schema(
       type: String,
       trim: true,
     },
+    accessType: {
+      type: String,
+      enum: ['Private', 'Public'],
+    },
+    labels: [
+      {
+        type: String,
+        unique: true,
+      },
+    ],
   },
   { timestamps: true }
 );

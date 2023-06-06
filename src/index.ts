@@ -5,6 +5,11 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import session from 'express-session';
+import { Redis } from 'ioredis';
+import RedisStore from 'connect-redis';
+import limiter from 'express-rate-limit';
+
 import homeRoute from '@routes/home';
 import authRoutes from '@routes/auth';
 import projectRoutes from '@routes/project';
@@ -16,7 +21,15 @@ import taskRoutes from '@routes/task';
 dotenv.config({
   path: process.env.NODE_ENV === 'dev' ? './.env' : './.env.production',
 });
-const { PORT, MONGO_URL } = process.env;
+const {
+  PORT,
+  MONGO_URL,
+  SESSION_SECRET,
+  SECURE_COOKIE,
+  REDIS_PORT,
+  REDIS_URL,
+  REDIS_PASSWORD,
+} = process.env;
 const app: Express = express();
 
 /**
@@ -30,6 +43,33 @@ app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(cors());
 app.use('/assets', express.static('public/assets'));
+
+/**
+ * Session setup with Redis store
+ */
+const redisClient = new Redis({
+  port: REDIS_PORT,
+  host: REDIS_URL,
+  password: REDIS_PASSWORD,
+});
+
+const redisStore = new RedisStore({
+  client: redisClient,
+  ttl: 300,
+});
+
+app.use(
+  session({
+    store: redisStore,
+    resave: false, // required: force lightweight session keep alive (touch)
+    saveUninitialized: false, // recommended: only save session when data exists
+    secret: SESSION_SECRET,
+    // cookie: {
+    //   maxAge: 300,
+    //   // secure: SECURE_COOKIE,
+    // },
+  })
+);
 
 /**
  * ROUTES SETUP

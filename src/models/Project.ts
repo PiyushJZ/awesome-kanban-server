@@ -37,6 +37,16 @@ const projectSchema = new Schema(
         unique: true,
       },
     ],
+    viewers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
+    accessType: {
+      type: String,
+      enum: ['Private', 'Public'],
+    },
   },
   { timestamps: true }
 );
